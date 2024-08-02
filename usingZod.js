@@ -1,15 +1,15 @@
 const express = require("express")
 const zod = require("zod")
 const app= express();
-let myschema =zod.array(zod.number())
+let myschema =zod.array(zod.number)
 
 app.use(express.json())
 app.post("/health-checkup", function(req, res){
     const kidneys= req.body.kidneys;
-    const response= myschema.safeParse(kidneys);
-   if(response){
+    const kidneyLength= kidneys.length;
+   if(myschema){
         res.json({
-        msg: response
+        msg: "you have "+kidneyLength+" kidneys"
     })
 }
 })
